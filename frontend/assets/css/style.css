@@ -1,0 +1,227 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #7c3aed);
+
+  background-size: 300% 300%;
+
+  animation: bgMove 12s ease infinite;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login-wrapper {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 25px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.login-card {
+  width: 420px;
+
+  padding: 40px;
+}
+
+.logo-circle {
+  width: 80px;
+
+  height: 80px;
+
+  border-radius: 50%;
+
+  margin: auto;
+
+  background: white;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 35px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-control {
+  height: 50px;
+
+  border-radius: 12px;
+
+  border: none;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.btn {
+  height: 50px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #2563eb;
+
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(15px);
+
+  border-radius: 20px;
+
+  padding: 15px 25px;
+
+  color: white;
+}
+
+.dashboard {
+  padding: 35px;
+}
+
+.card-modern {
+  background: white;
+
+  border: none;
+
+  border-radius: 20px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.table {
+  vertical-align: middle;
+}
+
+.table thead {
+  background: #2563eb;
+
+  color: white;
+}
+
+.table th {
+  border: none;
+}
+
+.table td {
+  padding: 15px;
+}
+
+.btn-edit {
+  background: #f59e0b;
+
+  color: white;
+
+  border: none;
+}
+
+.btn-delete {
+  background: #ef4444;
+
+  color: white;
+
+  border: none;
+}
+
+.btn-edit:hover {
+  background: #d97706;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+input,
+select {
+  height: 45px !important;
+}
+
+.title {
+  font-weight: 700;
+
+  color: #2563eb;
+}
+
+.subtitle {
+  color: #777;
+}
+
+.logout-btn {
+  border-radius: 10px;
+}
+
+.stats-card {
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+
+  color: white;
+
+  padding: 25px;
+}
+
+.stats-number {
+  font-size: 35px;
+
+  font-weight: bold;
+}
+
+.action-btn {
+  margin-right: 5px;
+}
+
+.modal-content {
+  border-radius: 20px;
+}
+
+.form-label {
+  font-weight: 500;
+}
