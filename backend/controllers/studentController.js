@@ -2,12 +2,21 @@ const db = require("../config/db");
 
 exports.getStudents = (req, res) => {
   db.query("SELECT * FROM students", (err, result) => {
-    if (err) return res.status(500).json(err);
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Gagal mengambil data mahasiswa",
+        error: err.message,
+      });
+    }
 
-    res.json(result);
+    res.status(200).json({
+      success: true,
+      message: "Data mahasiswa berhasil diambil",
+      data: result,
+    });
   });
 };
-
 
 // CREATE STUDENT
 exports.createStudent = (req, res) => {
@@ -20,8 +29,7 @@ exports.createStudent = (req, res) => {
     });
   }
 
-  const sql =
-    "INSERT INTO students (nama, nim, prodi, semester) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO students (nama,nim,prodi,semester) VALUES (?,?,?,?)";
 
   db.query(sql, [nama, nim, prodi, semester], (err, result) => {
     if (err) {
@@ -34,7 +42,9 @@ exports.createStudent = (req, res) => {
 
     res.status(201).json({
       success: true,
+
       message: "Mahasiswa berhasil ditambahkan",
+
       data: {
         id: result.insertId,
         nama,
@@ -49,6 +59,7 @@ exports.createStudent = (req, res) => {
 // UPDATE STUDENT
 exports.updateStudent = (req, res) => {
   const { id } = req.params;
+
   const { nama, nim, prodi, semester } = req.body;
 
   if (!nama || !nim || !prodi || !semester) {
@@ -58,14 +69,15 @@ exports.updateStudent = (req, res) => {
     });
   }
 
-  const sql =
-    "UPDATE students SET nama=?, nim=?, prodi=?, semester=? WHERE id=?";
+  const sql = "UPDATE students SET nama=?,nim=?,prodi=?,semester=? WHERE id=?";
 
   db.query(sql, [nama, nim, prodi, semester, id], (err, result) => {
     if (err) {
       return res.status(500).json({
         success: false,
+
         message: "Gagal mengubah data mahasiswa",
+
         error: err.message,
       });
     }
@@ -73,66 +85,103 @@ exports.updateStudent = (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({
         success: false,
+
         message: "Data mahasiswa tidak ditemukan",
       });
     }
 
     res.json({
       success: true,
+
       message: "Data mahasiswa berhasil diperbarui",
+
+      data: {
+        id,
+        nama,
+        nim,
+        prodi,
+        semester,
+      },
     });
   });
 };
 
 // GET STUDENT BY ID
 exports.getStudentById = (req, res) => {
-    const { id } = req.params;
-    const sql = "SELECT * FROM students WHERE id=?";
-    db.query(sql, [id], (err, result) => {
+  const { id } = req.params;
 
-        if (err) {
-            return res.status(500).json({
-                success: false,
-                message: "Gagal mengambil data mahasiswa",
-                error: err.message
-            });
-        }
+  db.query(
+    "SELECT * FROM students WHERE id=?",
 
-        if (result.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: "Data mahasiswa tidak ditemukan"
-            });
-        }
-        res.json({
-            success: true,
-            message: "Detail mahasiswa berhasil diambil",
-            data: result[0]
+    [id],
+
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+
+          message: "Gagal mengambil data mahasiswa",
+
+          error: err.message,
         });
-    });
+      }
+
+      if (result.length === 0) {
+        return res.status(404).json({
+          success: false,
+
+          message: "Data mahasiswa tidak ditemukan",
+        });
+      }
+
+      res.json({
+        success: true,
+
+        message: "Detail mahasiswa berhasil diambil",
+
+        data: result[0],
+      });
+    },
+  );
 };
 
 // DELETE STUDENT
 exports.deleteStudent = (req, res) => {
-    const { id } = req.params;
-    const sql = "DELETE FROM students WHERE id=?";
-    db.query(sql, [id], (err, result) => {
-        if (err) {
-            return res.status(500).json({
-                success: false,
-                message: "Gagal menghapus data mahasiswa",
-                error: err.message
-            });
-        }
-        if (result.affectedRows === 0) {
-            return res.status(404).json({
-                success: false,
-                message: "Data mahasiswa tidak ditemukan"
-            });
-        }
-        res.json({
-            success: true,
-            message: "Data mahasiswa berhasil dihapus"
+  const { id } = req.params;
+
+  db.query(
+    "DELETE FROM students WHERE id=?",
+
+    [id],
+
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+
+          message: "Gagal menghapus data mahasiswa",
+
+          error: err.message,
         });
-    });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({
+          success: false,
+
+          message: "Data mahasiswa tidak ditemukan",
+        });
+      }
+
+      res.json({
+        success: true,
+
+        message: "Data mahasiswa berhasil dihapus",
+
+        data: {
+          id,
+        },
+      });
+    },
+  );
 };

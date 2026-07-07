@@ -31,14 +31,6 @@ app.get("/health", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server berjalan di port ${PORT}`);
-});
-
-
-
 app.use("/api", authRoutes);
 app.use("/api/students", studentRoutes);
 
@@ -70,4 +62,10 @@ app.get("/health", (req, res) => {
       timestamp: new Date(),
     });
   });
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server berjalan di port ${PORT}`);
 });

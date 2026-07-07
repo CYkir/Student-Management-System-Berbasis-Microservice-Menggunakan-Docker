@@ -1,8 +1,5 @@
-// ===============================
-// Backend API
-// ===============================
-
-const BASE_URL = "http://localhost:3000/api";
+// API Backend melalui Nginx Reverse Proxy
+const BASE_URL = "/api";
 
 // ===============================
 // Token
@@ -20,14 +17,9 @@ function removeToken() {
   localStorage.removeItem("token");
 }
 
-// ===============================
-// Header JWT
-// ===============================
-
 function authHeader() {
   return {
     "Content-Type": "application/json",
-
     Authorization: "Bearer " + getToken(),
   };
 }
